@@ -17,18 +17,6 @@ body{
     width: 15vw;
 }
 
-.game{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-    width: 80vw;
-    height: 80vh;
-    background-color: rgba(56, 170, 156, 0.9);
-    border: 0.2em solid rgba(93, 19, 19, 0.093);
-}
-
 .score{
     margin: 0.5em auto;
     width: 30vw;
@@ -42,3 +30,26 @@ body{
     align-items: center;
     justify-content: center;
 }
+
+
+.game{
+    margin: 0 auto;
+    width: 80vw;
+    height: 80vh;
+    background-color: rgba(56, 170, 156, 0.9);
+    border: 0.2em solid rgba(93, 19, 19, 0.093);
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(15, 1fr);
+    grid-template-rows: repeat(15, 1fr);
+}
+
+.grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 2em;
+    font-size: 1em;
+    text-align: center;
+  }
