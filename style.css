@@ -43,13 +43,12 @@ body{
 .grid{
     display: grid;
     grid-template-columns: repeat(15, 1fr);
-    grid-template-rows: repeat(15, 1fr);
+    grid-template-rows: repeat(9, 1fr);
 }
 
 .grid-item {
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.8);
-    padding: 2em;
+    background-color: rgba(105, 49, 49, 0.8);
+    padding: 1em;
     font-size: 1em;
     text-align: center;
   }
