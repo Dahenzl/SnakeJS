@@ -29,6 +29,14 @@ body{
     border: 0.2em solid rgba(93, 19, 19, 0.093);
 }
 
+.score{
+    margin: 0.5em auto;
+    width: 30vw;
+    height: 4vh;
+    background-color: rgba(56, 170, 156, 0.9);
+    border: 0.2em solid rgba(93, 19, 19, 0.093);
+}
+
 .container{
     display: flex;
     align-items: center;
