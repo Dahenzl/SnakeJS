@@ -12,17 +12,18 @@ body{
     border: 0.2em solid rgba(93, 19, 19, 0.093);
     margin: 1em auto;
     background-color: rgba(61, 148, 61, 0.9);
-    font-size: 1vw;
+    font-size: 2vmin;
     height: 7vh;
-    width: 15vw;
+    width: 50%;
 }
 
 .score{
     margin: 0.5em auto;
-    width: 30vw;
+    width: 30%;
     height: 4vh;
     background-color: rgba(56, 170, 156, 0.9);
     border: 0.2em solid rgba(93, 19, 19, 0.093);
+    font-size: 2vmin;
 }
 
 .container{
@@ -48,7 +49,7 @@ body{
 
 .grid-item {
     background-color: rgba(105, 49, 49, 0.8);
-    padding: 1em;
-    font-size: 1em;
-    text-align: center;
+    width: auto;
+    height: auto;
+    color: rgba(255, 255, 255, 0.9);
   }
