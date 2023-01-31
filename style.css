@@ -1,0 +1,53 @@
+body{
+    font: 'Raleway', sans-serif;
+    color: rgba(72, 21, 21, 0.9);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5em;
+    top: 15%;
+    background: blue;
+}
+
+.tittle{
+    border: 0.2em solid rgba(93, 19, 19, 0.093);
+    margin: 1em auto;
+    background-color: rgba(61, 148, 61, 0.9);
+    font-size: 2vmin;
+    height: 7vh;
+    width: 50%;
+}
+
+.score{
+    margin: 0.5em auto;
+    width: 30%;
+    height: 4vh;
+    background-color: rgba(56, 170, 156, 0.9);
+    border: 0.2em solid rgba(93, 19, 19, 0.093);
+    font-size: 2vmin;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.game{
+    margin: 0 auto;
+    width: 80vw;
+    height: 80vh;
+    background-color: white;
+    border: 0.2em solid rgba(93, 19, 19, 0.093);
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(15, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+}
+
+.grid-item {
+    width: auto;
+    height: auto;
+  }
