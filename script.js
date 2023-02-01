@@ -1,6 +1,6 @@
 let grid = document.querySelector(".grid");
 let position = 0;
-let direction = 3;
+let direction = 0;
 
 function generateGrid() {
     for (let i = 0; i < 135; i++) {
@@ -28,7 +28,7 @@ function setDirection(e) {
 }
 
 function movement() {
-    list[position].style.backgroundColor = "white";
+    originalPosition = position
     switch (direction) {
         case 1:
             if (position % 15 === 0) {
@@ -63,7 +63,13 @@ function movement() {
             }
             break;
     }
-    list[position].style.backgroundColor = "red";
+
+    if ((position < 0 || position > 134) || ((position+1)%15 == 0)) {
+        clearInterval(movementIntervalId);
+    } else {
+        list[originalPosition].style.backgroundColor = "white";
+        list[position].style.backgroundColor = "red";
+    }
 }
 
 generateGrid();
@@ -73,4 +79,4 @@ list[position].style.backgroundColor = "red";
 
 document.addEventListener("keydown", setDirection);
 
-setInterval(movement, 400);
+movementIntervalId  = setInterval(movement, 400);
