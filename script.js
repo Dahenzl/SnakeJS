@@ -31,18 +31,36 @@ function movement() {
     list[position].style.backgroundColor = "white";
     switch (direction) {
         case 1:
-            position--;
+            if (position % 15 === 0) {
+                position = 0;
+                direction = 3;
+            } else{
+                position --;
+            }
             break;
         case 2:
-            position -= 15;
+            if (position < 15) {
+                position = 0;
+                direction = 3;
+            } else{
+                position -= 15;
+            }
             break;
         case 3:
-            position++;
+            if(position % 15 === 14){
+                position = 0;
+                direction = 3;
+            } else{
+                position ++;
+            }
             break;
         case 4:
-            position += 15;
-            break;
-        default:
+            if (position > 119) {
+                position = 0;
+                direction = 3;
+            } else{
+                position += 15;
+            }
             break;
     }
     list[position].style.backgroundColor = "red";
