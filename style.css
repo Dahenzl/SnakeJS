@@ -50,4 +50,41 @@ body{
 .grid-item {
     width: auto;
     height: auto;
-  }
+}
+
+.end{
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; 
+    left:0;
+    right:0;
+}
+
+#game-over{
+    font-size: 5vmin;
+    color:rgba(0, 0, 0, 0.5);
+    margin: 1em auto;
+    width: 50%;
+    height: 5vh;
+}
+
+#restart{
+    font-size: 3vmin;
+    color:rgba(0, 0, 0, 0.5);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    background:rgba(0,0,0,0);
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 1em auto;
+}
+
+#restart:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}

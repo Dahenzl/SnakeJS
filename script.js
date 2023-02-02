@@ -1,8 +1,26 @@
 let grid = document.querySelector(".grid");
 let score = document.querySelector("#score");
-let position = 0;
-let direction = 0;
-let apple = 0;
+let gameover = document.querySelector(".end");
+let restartButton = document.querySelector("#restart");
+let position;
+let direction ;
+let apple;
+let list;
+
+
+document.addEventListener("keydown", setDirection);
+restartButton.addEventListener("click", restart);
+
+function startGame(){
+    vanishGameover();
+    generateGrid();
+    list = document.querySelectorAll(".grid-item");
+    position = 0;
+    direction = 0;
+    list[position].style.backgroundColor = "red";
+    movementIntervalId  = setInterval(movement, 400);
+    apple_generator();
+}
 
 function generateGrid() {
     for (let i = 0; i < 135; i++) {
@@ -41,33 +59,54 @@ function checkApple() {
     }
 }
 
+function vanishGameover() {
+    gameover.style.display = "none";
+}
+
+function gameOver() {
+    gameover.style.display = "flex";
+    clearInterval(movementIntervalId);
+}
+
+function restart() {
+    refreshGrid();
+    score.innerHTML = 0;
+    startGame();
+}
+
+function refreshGrid() {
+    list[position].style.backgroundColor = "white";
+    list[apple].style.backgroundColor = "white";
+    grid.innerHTML = "";
+}
+
 function movement() {
     originalPosition = position
     switch (direction) {
         case 1:
             if (position % 15 === 0) {
-                clearInterval(movementIntervalId);
+                gameOver();
             } else{
                 position --;
             }
             break;
         case 2:
             if (position < 15) {
-                clearInterval(movementIntervalId);
+                gameOver();
             } else{
                 position -= 15;
             }
             break;
         case 3:
             if(position % 15 === 14){
-                clearInterval(movementIntervalId);
+                gameOver();
             } else{
                 position ++;
             }
             break;
         case 4:
             if (position > 119) {
-                clearInterval(movementIntervalId);
+                gameOver();
             } else{
                 position += 15;
             }
@@ -78,12 +117,5 @@ function movement() {
     checkApple();
 }
 
-generateGrid();
-let list = document.querySelectorAll(".grid-item");
+startGame();
 
-list[position].style.backgroundColor = "red";
-
-document.addEventListener("keydown", setDirection);
-
-movementIntervalId  = setInterval(movement, 400);
-apple_generator();
