@@ -1,28 +1,34 @@
 body{
     font: 'Raleway', sans-serif;
-    color: rgba(72, 21, 21, 0.9);
+    color :rgb(17, 12, 58);
     text-align: center;
     text-transform: uppercase;
-    letter-spacing: 0.5em;
-    top: 15%;
-    background: blue;
+    letter-spacing: 0.2em;
+    background-image: url(images/hojas.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-position-y: center;
+    background-attachment: fixed;
 }
 
 .tittle{
-    border: 0.2em solid rgba(93, 19, 19, 0.093);
+    border: 0.2em solid rgba(56, 170, 156, 0.9);
     margin: 1em auto;
-    background-color: rgba(61, 148, 61, 0.9);
-    font-size: 2vmin;
-    height: 7vh;
-    width: 50%;
+    border-radius: 20px;
+    background-color: rgba(56, 170, 156, 0.8);
+    font-size: 2.2vmin;
+    height: 6.5vh;
+    width: 30%;
 }
 
 .score{
     margin: 0.5em auto;
-    width: 30%;
+    width: 20%;
     height: 4vh;
-    background-color: rgba(56, 170, 156, 0.9);
-    border: 0.2em solid rgba(93, 19, 19, 0.093);
+    border-radius: 20px;
+    background-color: rgba(56, 170, 156, 0.8);
+    border: 0.2em solid rgba(56, 170, 156, 0.9);
     font-size: 2vmin;
 }
 
@@ -38,7 +44,7 @@ body{
     width: 80vw;
     height: 80vh;
     background-color: white;
-    border: 0.2em solid rgba(93, 19, 19, 0.093);
+    border: 0.29em solid rgba(14, 94, 20, 1);
 }
 
 .grid{
@@ -50,6 +56,9 @@ body{
 .grid-item {
     width: auto;
     height: auto;
+    background-size: 9vmin;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .end{
@@ -63,28 +72,29 @@ body{
     right:0;
 }
 
-#game-over{
+#message{
     font-size: 5vmin;
-    color:rgba(0, 0, 0, 0.5);
+    color:rgba(255, 255, 255, 0.75);
     margin: 1em auto;
     width: 50%;
     height: 5vh;
+    letter-spacing: 0.5em;
 }
 
 #restart{
     font-size: 3vmin;
-    color:rgba(0, 0, 0, 0.5);
+    color:rgba(255, 255, 255, 0.75);
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 0.3em;
     background:rgba(0,0,0,0);
     border: none;
     border-radius: 5px;
-    padding: 10px;
+    padding: 0.5em;
     margin: 1em auto;
 }
 
 #restart:hover{
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.15);
     cursor: pointer;
 }
