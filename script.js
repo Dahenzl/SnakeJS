@@ -2,21 +2,28 @@ let grid = document.querySelector(".grid");
 let score = document.querySelector("#score");
 let gameover = document.querySelector(".end");
 let restartButton = document.querySelector("#restart");
+let snakeSize = 1;
+let snakePositions = [0];
 let position;
-let direction ;
+let postionBehind;
+let direction;
 let apple;
 let list;
+let lastDirection;
 
 
-document.addEventListener("keydown", setDirection);
+let key = document.addEventListener("keydown", setDirection);
 restartButton.addEventListener("click", restart);
 
 function startGame(){
     vanishGameover();
     generateGrid();
     list = document.querySelectorAll(".grid-item");
+    snakeSize = 1;
+    snakePositions = [0];
     position = 0;
-    direction = 0;
+    direction = 3;
+    lastDirection = 3;
     list[position].style.backgroundColor = "red";
     movementIntervalId  = setInterval(movement, 400);
     apple_generator();
@@ -33,29 +40,77 @@ function generateGrid() {
 function setDirection(e) {
     switch (e.keyCode) {
         case 65:
-            direction = 1;
+            if(direction !== 3){
+                direction = 1;
+            }
             break;
         case 87:
-            direction = 2;
+            if(direction !== 4){
+                direction = 2;
+            }
             break;
         case 68:
-            direction = 3;
+            if(direction !== 1){
+                direction = 3;
+            }
             break;
         case 83:
-            direction = 4;
+            if(direction !== 2){
+                direction = 4;
+            }
             break;
     }
 }
 
 function apple_generator() {
-    apple = Math.floor(Math.random() * 135);
+    do{
+        apple = Math.floor(Math.random() * 135);
+    } while(snakePositions.includes(apple));
     list[apple].style.backgroundColor = "green";
+}
+
+function increaseSnake() {
+    snakeSize ++;
+    snakePositions.unshift(positionBehind(direction));
+}
+
+function positionBehind(dir){
+    switch (dir) {
+        case 1:
+            return position + 1;
+        case 2:
+            return position + 15;
+        case 3:
+            return position - 1;
+        case 4:
+            return position - 15;
+    }
+}
+
+function printSnake() {
+    list[snakePositions[0]].style.backgroundColor = "white";
+
+
+    for (let i = 0; i < snakePositions.length - 1; i++) {
+        snakePositions[i] = snakePositions[i + 1];
+        list[snakePositions[i]].style.backgroundColor = "red";
+    }
+
+    list[position].style.backgroundColor = "red";
+    snakePositions[snakePositions.length - 1] = position;
+}
+
+function checkSnake() {
+    if (snakePositions.includes(position)) {
+        gameOver();
+    }
 }
 
 function checkApple() {
     if (position === apple) {
         score.innerHTML = parseInt(score.innerHTML) + 10;
         apple_generator();
+        increaseSnake();
     }
 }
 
@@ -64,8 +119,8 @@ function vanishGameover() {
 }
 
 function gameOver() {
-    gameover.style.display = "flex";
     clearInterval(movementIntervalId);
+    gameover.style.display = "flex";
 }
 
 function restart() {
@@ -81,7 +136,8 @@ function refreshGrid() {
 }
 
 function movement() {
-    originalPosition = position
+    let originalPosition = position;
+    let checkBackwards = positionBehind(lastDirection);
     switch (direction) {
         case 1:
             if (position % 15 === 0) {
@@ -112,9 +168,20 @@ function movement() {
             }
             break;
     }
-    list[originalPosition].style.backgroundColor = "white";
-    list[position].style.backgroundColor = "red";
-    checkApple();
+
+    if(position === checkBackwards){
+        position = originalPosition;
+        direction = lastDirection;
+        movement();
+    } else{
+        checkSnake();
+
+        checkApple();
+
+        printSnake();
+
+        lastDirection = direction;
+    }
 }
 
 startGame();
