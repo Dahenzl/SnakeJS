@@ -3,6 +3,9 @@ let score = document.querySelector("#score");
 let gameover = document.querySelector(".end");
 let message = document.querySelector("#message");
 let restartButton = document.querySelector("#restart");
+let columns = 23;
+let rows = 14;
+let sizeGrid = columns * rows;
 let snakeSize;
 let snakePositions;
 let position;
@@ -25,20 +28,20 @@ function startGame(){
     restartButton.innerHTML = "Restart";
     list = document.querySelectorAll(".grid-item");
     snakeSize = 3;
-    snakePositions = [60,61,62];
-    position = 62;
+    snakePositions = [115,116,117];
+    position = 117;
     direction = 3;
     lastDirection = 3;
-    movementIntervalId  = setInterval(movement, 100);
+    movementIntervalId  = setInterval(movement, 120);
     apple_generator();
 }
 
 function generateGrid() {
     grid.innerHTML = "";
-    for (let i = 0; i < 135; i++) {
+    for (let i = 0; i < sizeGrid; i++) {
         let item = document.createElement("div");
         item.classList.add("grid-item");
-        if(i%2===0){
+        if(i%2 === 0){
             item.style.backgroundColor = "green";
         } else{
             item.style.backgroundColor = "lightgreen";
@@ -75,7 +78,7 @@ function setDirection(e) {
 function apple_generator() {
     let lastApple = apple;
     do{
-        apple = Math.floor(Math.random() * 135);
+        apple = Math.floor(Math.random() * sizeGrid);
     } while(snakePositions.includes(apple) || apple === lastApple);
     list[apple].style.backgroundImage = randomFruit();
 }
@@ -84,19 +87,20 @@ function randomFruit(){
     let fruit = Math.floor(Math.random() * 4);
     switch(fruit){
         case 0:
-            list[apple].style.backgroundSize = "9vmin";
+            list[apple].style.backgroundSize = "6vmin";
             return "url('images/apple.png')";
         case 1:
-            list[apple].style.backgroundSize = "11vmin";
+            list[apple].style.backgroundSize = "8vmin";
             return "url('images/banana.png')";
         case 2:
-            list[apple].style.backgroundSize = "7vmin";
+            list[apple].style.backgroundSize = "4.3vmin";
             return "url('images/pina.png')";
         case 3:
-            list[apple].style.backgroundSize = "8vmin";
+            list[apple].style.backgroundSize = "4.6vmin";
             return "url('images/uvas.png')";
     }
 }
+
 function increaseSnake() {
     snakeSize ++;
     snakePositions.unshift(positionBehind(direction));
@@ -107,11 +111,11 @@ function positionBehind(dir){
         case 1:
             return position + 1;
         case 2:
-            return position + 15;
+            return position + columns;
         case 3:
             return position - 1;
         case 4:
-            return position - 15;
+            return position - columns;
     }
 }
 
@@ -206,7 +210,7 @@ function printTail(){
     if(tail === next + 1){
         list[tail].style.backgroundImage = "url('images/snake/tailLEFT.png')";
     //downd
-    } else if(tail === next + 15){
+    } else if(tail === next + columns){
         list[tail].style.backgroundImage = "url('images/snake/tailDOWN.png')";
     //right 
     } else if(tail === next - 1){
@@ -250,7 +254,7 @@ function movement() {
     switch (direction) {
         //left
         case 1:
-            if (position % 15 === 0) {
+            if (position % columns === 0) {
                 gameOver();
                 return;
             } else{
@@ -259,16 +263,16 @@ function movement() {
             break;
         //up
         case 2:
-            if (position < 15) {
+            if (position < columns) {
                 gameOver();
                 return;
             } else{
-                position -= 15;
+                position -= columns;
             }
             break;
         //right
         case 3:
-            if(position % 15 === 14){
+            if(position % columns === columns - 1){
                 gameOver();
                 return;
             } else{
@@ -277,11 +281,11 @@ function movement() {
             break;
         //down
         case 4:
-            if (position > 119) {
+            if (position > (columns * rows) - columns - 1) {
                 gameOver();
                 return;
             } else{
-                position += 15;
+                position += columns;
             }
             break;
     }
@@ -303,5 +307,3 @@ function movement() {
         lastDirection = direction;
     }
 }
-
-generateGrid();
