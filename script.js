@@ -77,10 +77,26 @@ function apple_generator() {
     do{
         apple = Math.floor(Math.random() * 135);
     } while(snakePositions.includes(apple) || apple === lastApple);
-    list[apple].style.backgroundImage = "url('images/apple.png')";
-    list[apple].style.backgroundSize = "9vmin";
+    list[apple].style.backgroundImage = randomFruit();
 }
 
+function randomFruit(){
+    let fruit = Math.floor(Math.random() * 4);
+    switch(fruit){
+        case 0:
+            list[apple].style.backgroundSize = "9vmin";
+            return "url('images/apple.png')";
+        case 1:
+            list[apple].style.backgroundSize = "11vmin";
+            return "url('images/banana.png')";
+        case 2:
+            list[apple].style.backgroundSize = "7vmin";
+            return "url('images/piña.png')";
+        case 3:
+            list[apple].style.backgroundSize = "8vmin";
+            return "url('images/uvas.png')";
+    }
+}
 function increaseSnake() {
     snakeSize ++;
     snakePositions.unshift(positionBehind(direction));
