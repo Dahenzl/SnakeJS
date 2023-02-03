@@ -3,14 +3,15 @@ let score = document.querySelector("#score");
 let gameover = document.querySelector(".end");
 let message = document.querySelector("#message");
 let restartButton = document.querySelector("#restart");
-let snakeSize = 1;
-let snakePositions = [0];
+let snakeSize;
+let snakePositions;
 let position;
 let postionBehind;
 let direction;
 let apple;
 let list;
 let lastDirection;
+let originalPosition;
 
 
 let key = document.addEventListener("keydown", setDirection);
@@ -21,13 +22,12 @@ function startGame(){
     message.innerHTML = "Game over";
     restartButton.innerHTML = "Restart";
     list = document.querySelectorAll(".grid-item");
-    snakeSize = 1;
-    snakePositions = [0];
-    position = 0;
+    snakeSize = 3;
+    snakePositions = [60,61,62];
+    position = 62;
     direction = 3;
     lastDirection = 3;
-    list[position].style.backgroundColor = "red";
-    movementIntervalId  = setInterval(movement, 300);
+    movementIntervalId  = setInterval(movement, 100);
     apple_generator();
 }
 
@@ -76,6 +76,7 @@ function apple_generator() {
         apple = Math.floor(Math.random() * 135);
     } while(snakePositions.includes(apple) || apple === lastApple);
     list[apple].style.backgroundImage = "url('images/apple.png')";
+    list[apple].style.backgroundSize = "9vmin";
 }
 
 function increaseSnake() {
@@ -97,24 +98,104 @@ function positionBehind(dir){
 }
 
 function printSnake() {
-    if(snakePositions[0]%2===0){
-        list[snakePositions[0]].style.backgroundColor = "green";
-    } else{
-        list[snakePositions[0]].style.backgroundColor = "lightgreen";
-    }
+    list[snakePositions[0]].style.backgroundImage = "none";
 
     for (let i = 0; i < snakePositions.length - 1; i++) {
         snakePositions[i] = snakePositions[i + 1];
-        list[snakePositions[i]].style.backgroundColor = "red";
     }
 
-    list[position].style.backgroundColor = "red";
+    printHead();
+    printBody();
+    printTail();
+
     snakePositions[snakePositions.length - 1] = position;
 }
 
-function checkSnake() {
-    if (snakePositions.includes(position)) {
-        gameOver();
+function printHead() {
+        switch (direction) {
+            case 1:
+                list[position].style.backgroundImage = "url('images/snake/headLEFT.png')";
+                break;
+            case 2:
+                list[position].style.backgroundImage = "url('images/snake/headUP.png')";
+                break;
+            case 3:
+                list[position].style.backgroundImage = "url('images/snake/headRIGHT.png')";
+                break;
+            case 4:
+                list[position].style.backgroundImage = "url('images/snake/headDOWN.png')";
+                break;
+        }
+}
+
+function printBody() {
+    switch(direction){
+        case 1:
+            //up to left
+            if(lastDirection === 2){
+                list[originalPosition].style.backgroundImage = "url('images/snake/rightDown.png')";
+            //down to left
+            } else if(lastDirection === 4){
+                list[originalPosition].style.backgroundImage = "url('images/snake/rightUP.png')";
+            //left to left
+            } else{
+                list[originalPosition].style.backgroundImage = "url('images/snake/bodyHor.png')";
+            }
+            break;
+        case 2:
+            //left to up
+            if(lastDirection === 1){
+                list[originalPosition].style.backgroundImage = "url('images/snake/leftUP.png')";
+            //right to up
+            } else if(lastDirection === 3){
+                list[originalPosition].style.backgroundImage = "url('images/snake/rightUP.png')";
+            //up to up
+            } else{
+                list[originalPosition].style.backgroundImage = "url('images/snake/bodyVer.png')";
+            }
+            break;
+        case 3:
+            //up to right
+            if(lastDirection === 2){
+                list[originalPosition].style.backgroundImage = "url('images/snake/leftDown.png')";
+            //down to right
+            } else if(lastDirection === 4){
+                list[originalPosition].style.backgroundImage = "url('images/snake/leftUP.png')";
+            //right to right
+            } else{
+                list[originalPosition].style.backgroundImage = "url('images/snake/bodyHor.png')";
+            }
+            break;
+        case 4:
+            //left to down
+            if(lastDirection === 1){
+                list[originalPosition].style.backgroundImage = "url('images/snake/leftDown.png')";
+            //right to down
+            } else if(lastDirection === 3){
+                list[originalPosition].style.backgroundImage = "url('images/snake/rightDown.png')";
+            //down to down
+            } else{
+                list[originalPosition].style.backgroundImage = "url('images/snake/bodyVer.png')";
+            }
+            break;
+    }
+}
+
+function printTail(){
+    let tail = snakePositions[0];
+    let next = snakePositions[1];
+    //left
+    if(tail === next + 1){
+        list[tail].style.backgroundImage = "url('images/snake/tailLEFT.png')";
+    //downd
+    } else if(tail === next + 15){
+        list[tail].style.backgroundImage = "url('images/snake/tailDOWN.png')";
+    //right 
+    } else if(tail === next - 1){
+        list[tail].style.backgroundImage = "url('images/snake/tailRIGHT.png')";
+    //up 
+    } else{
+        list[tail].style.backgroundImage = "url('images/snake/tailUP.png')";
     }
 }
 
@@ -122,6 +203,7 @@ function checkApple() {
     if (position === apple) {
         score.innerHTML = parseInt(score.innerHTML) + 10;
         list[apple].style.backgroundImage = "none";
+        list[apple].style.backgroundSize = "cover";
         apple_generator();
         increaseSnake();
     }
@@ -143,33 +225,41 @@ function restart() {
 }
 
 function movement() {
-    let originalPosition = position;
+    originalPosition = position;
     let checkBackwards = positionBehind(lastDirection);
     switch (direction) {
+        //left
         case 1:
             if (position % 15 === 0) {
                 gameOver();
+                return;
             } else{
                 position --;
             }
             break;
+        //up
         case 2:
             if (position < 15) {
                 gameOver();
+                return;
             } else{
                 position -= 15;
             }
             break;
+        //right
         case 3:
             if(position % 15 === 14){
                 gameOver();
+                return;
             } else{
                 position ++;
             }
             break;
+        //down
         case 4:
             if (position > 119) {
                 gameOver();
+                return;
             } else{
                 position += 15;
             }
@@ -181,7 +271,10 @@ function movement() {
         direction = lastDirection;
         movement();
     } else{
-        checkSnake();
+        if (snakePositions.includes(position)) {
+            gameOver();
+            return;
+        }
 
         checkApple();
 

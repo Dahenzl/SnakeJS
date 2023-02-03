@@ -56,7 +56,7 @@ body{
 .grid-item {
     width: auto;
     height: auto;
-    background-size: 9vmin;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 }
