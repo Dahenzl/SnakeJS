@@ -32,7 +32,7 @@ function startGame(){
     position = 117;
     direction = 3;
     lastDirection = 3;
-    movementIntervalId  = setInterval(movement, 120);
+    movementIntervalId  = setInterval(movement, 125);
     apple_generator();
 }
 
@@ -307,3 +307,5 @@ function movement() {
         lastDirection = direction;
     }
 }
+
+generateGrid();
