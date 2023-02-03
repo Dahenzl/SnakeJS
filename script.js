@@ -296,8 +296,10 @@ function movement() {
         movement();
     } else{
         if (snakePositions.includes(position)) {
-            gameOver();
-            return;
+            if(position !== snakePositions[0]){
+                gameOver();
+                return;
+            } 
         }
 
         checkApple();
