@@ -91,7 +91,7 @@ function randomFruit(){
             return "url('images/banana.png')";
         case 2:
             list[apple].style.backgroundSize = "7vmin";
-            return "url('images/piña.png')";
+            return "url('images/pina.png')";
         case 3:
             list[apple].style.backgroundSize = "8vmin";
             return "url('images/uvas.png')";
