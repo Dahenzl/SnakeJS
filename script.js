@@ -13,11 +13,13 @@ let list;
 let lastDirection;
 let originalPosition;
 
+let startSound = new Audio('audios/start.wav');
 
 let key = document.addEventListener("keydown", setDirection);
 restartButton.addEventListener("click", restart);
 
 function startGame(){
+    startSound.play();
     vanishGameover();
     message.innerHTML = "Game over";
     restartButton.innerHTML = "Restart";
@@ -204,6 +206,8 @@ function checkApple() {
         score.innerHTML = parseInt(score.innerHTML) + 10;
         list[apple].style.backgroundImage = "none";
         list[apple].style.backgroundSize = "cover";
+        let eatSound = new Audio('audios/eat.wav');
+        eatSound.play();
         apple_generator();
         increaseSnake();
     }
