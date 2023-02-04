@@ -23,17 +23,20 @@ body{
 
 .tittle{
     border: 0.2em solid rgba(56, 170, 156, 0.9);
-    margin: 0.6em auto;
+    margin: 1.3vh auto;
+    margin: calc(var(--vh, 1vh) * 1.3) auto;
     border-radius: 20px;
     background-color: rgba(56, 170, 156, 0.8);
     font-size: 2.2vmin;
+    font-size: calc(var(--vh, 1vh) * 2.2);
     height: 6.5vh;
     height: calc(var(--vh, 1vh) * 6.5);
     width: 30%;
 }
 
 .score{
-    margin: 0.5em auto;
+    margin: 1vh auto;
+    margin: calc(var(--vh, 1vh) * 1) auto;
     width: 30%;
     height: 4vh;
     height: calc(var(--vh, 1vh) * 4);
@@ -41,6 +44,7 @@ body{
     background-color: rgba(56, 170, 156, 0.8);
     border: 0.2em solid rgba(56, 170, 156, 0.9);
     font-size: 2vmin;
+    font-size: calc(var(--vh, 1vh) * 2);
 }
 
 .container{
@@ -86,8 +90,10 @@ body{
 
 #message{
     font-size: 5vmin;
+    font-size: calc(var(--vh, 1vh) * 5);
     color:rgba(255, 255, 255, 0.75);
-    margin: 1em auto;
+    margin: 5vh auto;
+    margin: calc(var(--vh, 1vh) * 5) auto;
     width: 50%;
     height: 5vh;
     height: calc(var(--vh, 1vh) * 5);
@@ -96,6 +102,7 @@ body{
 
 #restart{
     font-size: 3vmin;
+    font-size: calc(var(--vh, 1vh) * 3);
     color:rgba(255, 255, 255, 0.75);
     text-align: center;
     text-transform: uppercase;
