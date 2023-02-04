@@ -21,7 +21,7 @@ let touchendX = 0
 let touchstartY = 0
 let touchendY = 0
 
-let key = document.addEventListener("keydown", setDirection);
+document.addEventListener("keydown", setDirection);
 restartButton.addEventListener("click", restart);
 pauseButton.addEventListener("click", pause);
 
@@ -122,16 +122,16 @@ function randomFruit(){
     let fruit = Math.floor(Math.random() * 4);
     switch(fruit){
         case 0:
-            list[apple].style.backgroundSize = "6vmin";
+            list[apple].style.backgroundSize = "calc(var(--vmin, 1vmin) * 6)";
             return "url('images/apple.png')";
         case 1:
-            list[apple].style.backgroundSize = "8vmin";
+            list[apple].style.backgroundSize = "calc(var(--vmin, 1vmin) * 8)";
             return "url('images/banana.png')";
         case 2:
-            list[apple].style.backgroundSize = "4.3vmin";
+            list[apple].style.backgroundSize = "calc(var(--vmin, 1vmin) * 4.3)";
             return "url('images/pina.png')";
         case 3:
-            list[apple].style.backgroundSize = "4.6vmin";
+            list[apple].style.backgroundSize = "calc(var(--vmin, 1vmin) * 4.6)";
             return "url('images/uva.png')";
     }
 }
@@ -284,6 +284,7 @@ function restart() {
     let buttonSound = new Audio('audios/start.wav');
     buttonSound.play();
     if(message.innerHTML === "Paused"){
+        direction = lastDirection;
         movementIntervalId = setInterval(movement, 125);
         vanishGameover();
     } else{
