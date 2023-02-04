@@ -15,11 +15,26 @@ let apple;
 let list;
 let lastDirection;
 let originalPosition;
+let touchstartX = 0
+let touchendX = 0
+let touchstartY = 0
+let touchendY = 0
 
 let startSound = new Audio('audios/start.wav');
 
 let key = document.addEventListener("keydown", setDirection);
 restartButton.addEventListener("click", restart);
+
+document.addEventListener('touchstart', e => {
+    touchstartX = e.changedTouches[0].screenX
+    touchstartY = e.changedTouches[0].screenY
+})
+  
+document.addEventListener('touchend', e => {
+    touchendX = e.changedTouches[0].screenX
+    touchendY = e.changedTouches[0].screenY
+    checkDirection()
+})
 
 function startGame(){
     startSound.play();
@@ -52,22 +67,30 @@ function generateGrid() {
 
 function setDirection(e) {
     switch (e.keyCode) {
+        //left
         case 65:
+        case 37:
             if(direction !== 3){
                 direction = 1;
             }
             break;
+        //up
         case 87:
+        case 38:
             if(direction !== 4){
                 direction = 2;
             }
             break;
+        //right
         case 68:
+        case 39:
             if(direction !== 1){
                 direction = 3;
             }
             break;
+        //down
         case 83:
+        case 40:
             if(direction !== 2){
                 direction = 4;
             }
@@ -307,6 +330,24 @@ function movement() {
         printSnake();
 
         lastDirection = direction;
+    }
+}
+
+function checkDirection() {
+    let changeX = touchendX - touchstartX;
+    let changeY = touchendY - touchstartY;
+    if(Math.abs(changeX) > Math.abs(changeY)){
+        if(changeX < 0){
+            direction = 1;
+        } else{
+            direction = 3;
+        }
+    } else{
+        if(changeY < 0){
+            direction = 2;
+        } else{
+            direction = 4;
+        }
     }
 }
 
