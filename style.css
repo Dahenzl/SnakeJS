@@ -116,6 +116,7 @@ body{
     display: none;
     position: absolute;
     top: 12%;
+    top: calc(var(--vh, 1vh) * 12);
     left: 5%;
     font-size: 1.5vw;
     color:rgb(225, 255, 1);
