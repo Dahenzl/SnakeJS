@@ -375,6 +375,14 @@ function checkDirection() {
 
 function resizeOps() {
     document.documentElement.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
+    document.documentElement.style.setProperty("--vw", window.innerWidth * 0.01 + "px");
+    let newWidth = window.innerWidth * 0.01;
+    let newHeight = window.innerHeight * 0.01;
+    if(newWidth < newHeight){
+        document.documentElement.style.setProperty("--vmin", newWidth + "px");
+    } else{
+        document.documentElement.style.setProperty("--vmin", newHeight + "px");
+    }
 };
 
 resizeOps();

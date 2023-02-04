@@ -28,7 +28,7 @@ body{
     border-radius: 20px;
     background-color: rgba(56, 170, 156, 0.8);
     font-size: 2.2vmin;
-    font-size: calc(var(--vh, 1vh) * 2.2);
+    font-size: calc(var(--vmin, 1vmin) * 2.2);
     height: 6.5vh;
     height: calc(var(--vh, 1vh) * 6.5);
     width: 30%;
@@ -44,7 +44,7 @@ body{
     background-color: rgba(56, 170, 156, 0.8);
     border: 0.2em solid rgba(56, 170, 156, 0.9);
     font-size: 2vmin;
-    font-size: calc(var(--vh, 1vh) * 2);
+    font-size: calc(var(--vmin, 1vmin) * 2);
 }
 
 .container{
@@ -90,11 +90,11 @@ body{
 
 #message{
     font-size: 5vmin;
-    font-size: calc(var(--vh, 1vh) * 5);
+    font-size: calc(var(--vmin, 1vmin) * 5);
     color:rgba(255, 255, 255, 0.75);
     margin: 5vh auto;
     margin: calc(var(--vh, 1vh) * 5) auto;
-    width: 50%;
+    width: 100%;
     height: 5vh;
     height: calc(var(--vh, 1vh) * 5);
     letter-spacing: 0.5em;
@@ -102,7 +102,7 @@ body{
 
 #restart{
     font-size: 3vmin;
-    font-size: calc(var(--vh, 1vh) * 3);
+    font-size: calc(var(--vmin, 1vmin) * 3);
     color:rgba(255, 255, 255, 0.75);
     text-align: center;
     text-transform: uppercase;
