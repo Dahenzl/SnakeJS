@@ -20,8 +20,6 @@ let touchendX = 0
 let touchstartY = 0
 let touchendY = 0
 
-let startSound = new Audio('audios/start.wav');
-
 let key = document.addEventListener("keydown", setDirection);
 restartButton.addEventListener("click", restart);
 
@@ -37,10 +35,7 @@ document.addEventListener('touchend', e => {
 })
 
 function startGame(){
-    startSound.play();
     vanishGameover();
-    message.innerHTML = "Game over";
-    restartButton.innerHTML = "Restart";
     list = document.querySelectorAll(".grid-item");
     snakeSize = 3;
     snakePositions = [115,116,117];
@@ -95,7 +90,17 @@ function setDirection(e) {
                 direction = 4;
             }
             break;
+        case 27:
+            pause();
+            break;
     }
+}
+
+function pause(){
+    clearInterval(movementIntervalId);
+    message.innerHTML = "Paused";
+    restartButton.innerHTML = "Continue";
+    gameover.style.display = "flex";
 }
 
 function apple_generator() {
@@ -262,13 +267,22 @@ function vanishGameover() {
 
 function gameOver() {
     clearInterval(movementIntervalId);
+    message.innerHTML = "Game over";
+    restartButton.innerHTML = "Restart";
     gameover.style.display = "flex";
 }
 
 function restart() {
-    generateGrid();
-    score.innerHTML = 0;
-    startGame();
+    let buttonSound = new Audio('audios/start.wav');
+    buttonSound.play();
+    if(message.innerHTML === "Paused"){
+        movementIntervalId = setInterval(movement, 125);
+        vanishGameover();
+    } else{
+        generateGrid();
+        score.innerHTML = 0;
+        startGame();
+    }
 }
 
 function movement() {
