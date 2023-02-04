@@ -3,6 +3,7 @@ let score = document.querySelector("#score");
 let gameover = document.querySelector(".end");
 let message = document.querySelector("#message");
 let restartButton = document.querySelector("#restart");
+let pauseButton = document.querySelector("#pause");
 let columns = 23;
 let rows = 14;
 let sizeGrid = columns * rows;
@@ -22,6 +23,7 @@ let touchendY = 0
 
 let key = document.addEventListener("keydown", setDirection);
 restartButton.addEventListener("click", restart);
+pauseButton.addEventListener("click", pause);
 
 document.addEventListener('touchstart', e => {
     touchstartX = e.changedTouches[0].screenX
@@ -36,6 +38,7 @@ document.addEventListener('touchend', e => {
 
 function startGame(){
     vanishGameover();
+    pauseButton.style.display = "flex";
     list = document.querySelectorAll(".grid-item");
     snakeSize = 3;
     snakePositions = [115,116,117];
@@ -91,12 +94,16 @@ function setDirection(e) {
             }
             break;
         case 27:
-            pause();
+            if(gameover.style.display === "none"){
+                pause();
+            }
             break;
     }
 }
 
 function pause(){
+    let pauseSound = new Audio("audios/start.wav");
+    pauseSound.play();
     clearInterval(movementIntervalId);
     message.innerHTML = "Paused";
     restartButton.innerHTML = "Continue";
@@ -267,6 +274,7 @@ function vanishGameover() {
 
 function gameOver() {
     clearInterval(movementIntervalId);
+    pauseButton.style.display = "none";
     message.innerHTML = "Game over";
     restartButton.innerHTML = "Restart";
     gameover.style.display = "flex";
