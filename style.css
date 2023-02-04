@@ -1,6 +1,6 @@
 html, body{
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     position: fixed;
     overflow: hidden;
     overscroll-behavior-y: contain;
@@ -104,5 +104,24 @@ body{
 
 #restart:hover{
     background-color: rgba(255, 255, 255, 0.15);
+    cursor: pointer;
+}
+
+#pause{
+    display: none;
+    position: absolute;
+    top: 12%;
+    left: 5%;
+    font-size: 1.5vw;
+    color:rgb(225, 255, 1);
+    letter-spacing: 0.3em;
+    background:rgba(255, 174, 0, 0.6);
+    border: 0.1em solid rgb(255, 174, 1);
+    border-radius: 1em;
+    padding: 0.4em 0.4em 0.5em 0.65em;
+}
+
+#pause:hover{
+    background:rgba(255, 174, 0, 0.9);
     cursor: pointer;
 }
